@@ -25,7 +25,6 @@ post_schema = PostSchema()
 posts_schema = PostSchema(many=True)
 
 
-
 class PostsResource(Resource):
     def get(self):
         return posts_schema.dump(Post.query.all())
@@ -41,22 +40,21 @@ class PostsResource(Resource):
     
     
     
-# class PostResource(Resource):
-#     def get(self,pk):
-#         return post_schema.dump(Post.query.get_or_404(pk))
+class PostResource(Resource):
+    def get(self,pk):
+        return post_schema.dump(Post.query.get_or_404(pk))
     
     
 
-#     def patch(self,pk):
-#         data = request.json 
-#         post = Post.query.get_or_404(pk)
+    def patch(self,pk):
+        data = request.json 
+        post = Post.query.get_or_404(pk)
         
-#         if 'set_alarm' in data:
-#             post.set_alarm = data['set_alarm']
+        if 'set_alarm' in data:
+            post.set_alarm = data['set_alarm']
         
-        
-#         db.session.commit()
-#         return post_schema.dump(post)
+        db.session.commit()
+        return post_schema.dump(post)
     
 #     def delete(self,pk):
 #         post = Post.query.get_or_404(pk)
@@ -65,14 +63,14 @@ class PostsResource(Resource):
 #         return '',204
     
     
-# api.add_resource(PostResource,'/post/<int:pk>')
+api.add_resource(PostResource,'/post/<int:pk>')
     
 api.add_resource(PostsResource,'/posts')
 
 
     
 if __name__ =='__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000,debug=True)
     
     
     

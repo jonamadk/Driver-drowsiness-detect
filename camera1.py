@@ -1,7 +1,7 @@
 
 from packages import *
 from services import call_api
-from main import post
+
 
 class VideoCamera(object):
     def __init__(self):
@@ -76,35 +76,35 @@ class VideoCamera(object):
                         if COUNTER >= EYE_ASPECT_RATIO_CONSEC_FRAMES:
                             # pygame.mixer.music.play(-1)
                             print("ys")
-                            # call_api(True)
+                            call_api(True)
                             
                             
-                        # else:
+                        else:
                             # print("zs")
-                            # call_api(False)
+                            call_api(False)
                                    
                     else:
                         # pygame.mixer.music.stop()
                         COUNTER = 0
                     
-                    if(mouthAspectRatio > MOUTH_ASPECT_RATIO_THRESHOLD):
-                        COUNTER_MOUTH += 1
-                        # print("mouth open frame", COUNTER_MOUTH)
-                        if (COUNTER_MOUTH>MOUTH_ASPECT_RATIO_CONSEC_FRAMES):
-                            yawn_status = True
-                            COUNTER_MOUTH = 0  
-                    else:
-                        yawn_status = False
-                        # print("MAR<THRESHOLD")
+                    # if(mouthAspectRatio > MOUTH_ASPECT_RATIO_THRESHOLD):
+                    #     COUNTER_MOUTH += 1
+                    #     # print("mouth open frame", COUNTER_MOUTH)
+                    #     if (COUNTER_MOUTH>MOUTH_ASPECT_RATIO_CONSEC_FRAMES):
+                    #         yawn_status = True
+                    #         COUNTER_MOUTH = 0  
+                    # else:
+                    #     yawn_status = False
+                    #     # print("MAR<THRESHOLD")
 
-                    if previous_yawn_status == True and yawn_status == False:
-                        yawns +=1
+                    # if previous_yawn_status == True and yawn_status == False:
+                    #     yawns +=1
                     
-                        if yawns >= 5:
-                            print("ring")
-                            yawns =0
-                            pygame.mixer.music.play() 
-                            post(True)
+                    #     if yawns >= 5:
+                    #         print("ring")
+                    #         yawns =0
+                    #         pygame.mixer.music.play() 
+                    #         post(True)
                        
 
 obj = VideoCamera()

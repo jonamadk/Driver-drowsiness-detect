@@ -1,6 +1,7 @@
 
 from packages import *
-from services import call_api
+from services import call_api, call_api_mouth
+
 
 
 class VideoCamera(object):
@@ -77,49 +78,38 @@ class VideoCamera(object):
                         
                         COUNTER += 1
                         if COUNTER >= EYE_ASPECT_RATIO_CONSEC_FRAMES:
-                            # pygame.mixer.music.play(-1)
-                            
-                            # ear_status = True
-                            
-                           
+                            pygame.mixer.music.play(-1)
                             call_api(True)
-                            
-                            print("sleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeping")
-                            
+                            print("sleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeping")
                             
                         else:
-                            # ear_status = False
                             call_api(False)
-                            print("no sleep")
-                            
-                        # if(previous_ear_status == True and ear_status ==False):
-                            
-                        #     call_api(True)
-                        #     print("sleep")
-                            
-                                   
+                            print("no sleep")             
                     else:
-                        # pygame.mixer.music.stop()
+                        pygame.mixer.music.stop()
                         COUNTER = 0
                     
-                    # if(mouthAspectRatio > MOUTH_ASPECT_RATIO_THRESHOLD):
-                    #     COUNTER_MOUTH += 1
-                    #     # print("mouth open frame", COUNTER_MOUTH)
-                    #     if (COUNTER_MOUTH>MOUTH_ASPECT_RATIO_CONSEC_FRAMES):
-                    #         yawn_status = True
-                    #         COUNTER_MOUTH = 0  
-                    # else:
-                    #     yawn_status = False
-                    #     # print("MAR<THRESHOLD")
+                    if(mouthAspectRatio > MOUTH_ASPECT_RATIO_THRESHOLD):
+                        COUNTER_MOUTH += 1
+                        print("mouth open frame", COUNTER_MOUTH)
+                        if (COUNTER_MOUTH>MOUTH_ASPECT_RATIO_CONSEC_FRAMES):
+                            yawn_status = True
+                            COUNTER_MOUTH = 0  
+                    else:
+                        yawn_status = False
+                       
 
-                    # if previous_yawn_status == True and yawn_status == False:
-                    #     yawns +=1
+                    if previous_yawn_status == True and yawn_status == False:
+                        yawns +=1
                     
-                    #     if yawns >= 5:
-                    #         print("ring")
-                    #         yawns =0
-                    #         pygame.mixer.music.play() 
-                    #         post(True)
+                        if yawns >= 5:
+                            call_api_mouth(yawns)
+                            yawns =0
+                            pygame.mixer.music.play() 
+                        else:
+                            call_api_mouth(1)
+                            
+                            
                        
 
 obj = VideoCamera()

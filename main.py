@@ -16,10 +16,11 @@ ma = Marshmallow(app)
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     set_alarm = db.Column(db.Boolean, unique = False, default = True)
+    mouth_status = db.Column(db.Integer)
     
 class PostSchema(ma.Schema):
     class Meta:
-        fields = ('id','set_alarm')
+        fields = ('id','set_alarm','mouth_status')
         
 post_schema = PostSchema()
 posts_schema = PostSchema(many=True)
@@ -33,7 +34,7 @@ class PostsResource(Resource):
     def post(self):
         
         data = request.json
-        post = Post(set_alarm = data['set_alarm'])
+        post = Post(set_alarm = data['set_alarm'], mouth_status= data['mouth_status'])
         db.session.add(post)
         db.session.commit()
         return post_schema.dump(post)
@@ -52,9 +53,14 @@ class PostResource(Resource):
         
         if 'set_alarm' in data:
             post.set_alarm = data['set_alarm']
+            
         
+        if  'mouth_status' in data:
+            post.mouth_status = data['mouth_status']
+            
         db.session.commit()
         return post_schema.dump(post)
+    
     
 #     def delete(self,pk):
 #         post = Post.query.get_or_404(pk)

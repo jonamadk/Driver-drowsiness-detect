@@ -14,9 +14,9 @@ def call_api(sleep_status):
 def call_api_mouth(mouth_status):
 
     url = 'http://127.0.0.1:5000/post/1'
-    myobj = {"mouth_status":mouth_status}
+    myobj1 = {"mouth_status":mouth_status}
 
-    x = requests.patch(url, json= myobj)
+    x = requests.patch(url, json= myobj1)
 
 
   

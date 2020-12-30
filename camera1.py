@@ -144,21 +144,21 @@ class VideoCamera(object):
                 if(eyeAspectRatio < EYE_ASPECT_RATIO_THRESHOLD):
                     
                     COUNTER += 1
-                    print("EYE ASPECT COUNTER FRAME",COUNTER)
-                    print("less than theshold")
+                    # print("EYE ASPECT COUNTER FRAME",COUNTER)
+                    # print("less than theshold")
                     #If no. of frames is greater than threshold frames,
                     if COUNTER >= EYE_ASPECT_RATIO_CONSEC_FRAMES:
                         call_api(True)
-                        print("SLEEPING_SLEEPING_SLEEPING_SLEEPING")
-                        print("EAR",eyeAspectRatio)
-                        print(call_api)
+                        # print("SLEEPING_SLEEPING_SLEEPING_SLEEPING")
+                        # print("EAR",eyeAspectRatio)
+                        # print(call_api)
                         pygame.mixer.music.play(-1)
 
-                        cv2.putText(frame,"Subject is SLEEPING",(50,450),
+                        cv2.putText(frame," SLEEPING",(50,450),
                                 cv2.FONT_HERSHEY_COMPLEX,1,(0,0,255),2)
                         
                         
-                        cv2.putText(frame,"Subject is SLEEPING",(50,450),
+                        cv2.putText(frame," SLEEPING",(50,450),
                                 cv2.FONT_HERSHEY_COMPLEX,1,(0,0,255),2)
                                 
                         
@@ -176,13 +176,13 @@ class VideoCamera(object):
                         
                 if(mouthAspectRatio > MOUTH_ASPECT_RATIO_THRESHOLD):
                     COUNTER_MOUTH += 1
-                    print("mouth open frame", COUNTER_MOUTH)
+                    # print("mouth open frame", COUNTER_MOUTH)
                     
-                    if (COUNTER_MOUTH>MOUTH_ASPECT_RATIO_CONSEC_FRAMES):
+                    if (COUNTER_MOUTH>=MOUTH_ASPECT_RATIO_CONSEC_FRAMES):
                         yawn_status = True
                         COUNTER_MOUTH = 0
                         print("MAR",mouthAspectRatio)
-                        cv2.putText(frame,"Subject is yawning",(50,450),
+                        cv2.putText(frame,"Yawning",(50,450),
                                 cv2.FONT_HERSHEY_COMPLEX,1,(0,0,255),2)
                         output_text = "Yawn Count:" + str(yawns+1)
                     
@@ -191,7 +191,7 @@ class VideoCamera(object):
                         
                 else:
                     yawn_status = False
-                    print("MAR<THRESHOLD")
+                    # print("MAR<THRESHOLD")
                     call_api_mouth(False)
                     
                 
@@ -205,7 +205,7 @@ class VideoCamera(object):
                         pygame.mixer.music.play()
                         
                         
-                        cv2.putText(frame,"SUBJECT IS YAWNINIG Frequently", (50,50),
+                        cv2.putText(frame," YAWNINIG Freq", (50,50),
                                     cv2.FONT_HERSHEY_COMPLEX,1,(0,0,255),2)
                         
                         

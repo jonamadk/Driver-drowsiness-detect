@@ -34,7 +34,7 @@ class PostsResource(Resource):
     def post(self):
         
         data = request.json
-        post = Post(set_alarm = data['set_alarm'], mouth_status= data['mouth_status'])
+        post = Post(set_alarm = data['set_alarm'],mouth_status=data['mouth_status'])
         db.session.add(post)
         db.session.commit()
         return post_schema.dump(post)
@@ -53,20 +53,15 @@ class PostResource(Resource):
         
         if 'set_alarm' in data:
             post.set_alarm = data['set_alarm']
-            
-        
-        if  'mouth_status' in data:
+
+        if 'mouth_status' in data:
             post.mouth_status = data['mouth_status']
-            
+
+        
         db.session.commit()
         return post_schema.dump(post)
     
-    
-#     def delete(self,pk):
-#         post = Post.query.get_or_404(pk)
-#         db.session.delete(post)
-#         db.session.commit()
-#         return '',204
+
     
     
 api.add_resource(PostResource,'/post/<int:pk>')
